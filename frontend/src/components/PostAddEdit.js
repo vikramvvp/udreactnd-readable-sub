@@ -1,10 +1,12 @@
 import React, { Component } from 'react';
 import CommentForm from './CommentForm';
 
-class BooksApp extends Component {
+class PostAddEdit extends Component {
   render() {
-    <div>
+    return(<div>
     <CommentForm />
-    </div>
+    </div>);
   }
 }
+
+export default PostAddEdit;

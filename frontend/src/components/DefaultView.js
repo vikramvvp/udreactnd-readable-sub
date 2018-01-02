@@ -1,29 +1,33 @@
 import React, { Component } from 'react';
-
+import { Route, Link } from 'react-router-dom';
 import CategoriesList from './CategoriesList';
 import PostsList from './PostsList';
-
+import PostAddEdit from './PostAddEdit';
 
 class DefaultView extends Component {
   render() {
     return (
-      <div class="container">
-      <div class="row">
-        <PostsList />
-        <div class="col-md-4">
-          <div class="card my-4">
-            <div class="card-body">
-              <span class="input-group-btn">
-                <button class="btn btn-secondary" type="button">Add New Post</button>
-              </span>
+      <div className="container">
+        <Route exact path='/' render={() => (
+          <div className="row">
+            <PostsList />
+            <div className="col-md-4">
+              <div className="card my-4">
+                <div className="card-body">
+                  <span className="input-group-btn">
+                    <Link className="btn btn-primary" to='/postaddedit' >Add New Post</Link>
+                  </span>
+                </div>
+              </div>
+              <CategoriesList />
             </div>
           </div>
-  
-          <CategoriesList />
-        </div>
-  
+        ) } />
+
+        <Route path='/postaddedit' render={({ history }) => (
+          <PostAddEdit />
+        )} />
       </div>
-    </div>
     );
   }
 }
