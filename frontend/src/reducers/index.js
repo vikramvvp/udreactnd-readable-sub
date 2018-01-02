@@ -17,7 +17,9 @@ function blogPost(state={}, action) {
       return {...state,
         categories: action.payload.categories};
     case GET_POSTS:
-      return state;
+      console.log('action',action);
+      return {...state,
+        posts: action.posts};
     case FETCH_POST:
       return state;
     case UPDATE_POST:

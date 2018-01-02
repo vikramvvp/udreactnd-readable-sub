@@ -73,7 +73,7 @@ export function updatePost() {
 
 export function loadPosts() {
   return function(dispatch, getState) {
-    return fetch(`${ROOT_URL}/categories`, AUTH_HEADER)
+    return fetch(`${ROOT_URL}/posts`, AUTH_HEADER)
     .then(result => {
       if (result.status === 200) {
         return result.json();
@@ -81,7 +81,7 @@ export function loadPosts() {
       throw new Error("request failed");
     })
     .then(jsonResult => {
-      dispatch({type: GET_POSTS, categories: jsonResult});
+      dispatch({type: GET_POSTS, posts: jsonResult});
     })
     .catch(err => {
       console.log(err);
