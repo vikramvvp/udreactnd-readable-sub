@@ -1,6 +1,6 @@
 import React from 'react'
 
-export default function CommentForm() {
+export default function CommentsView() {
   return (
     <div className="media mb-4">
       <img className="d-flex mr-3 rounded-circle" src="http://placehold.it/50x50" alt="" />

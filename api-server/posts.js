@@ -24,6 +24,17 @@ const defaultData = {
     voteScore: -5,
     deleted: false,
     commentCount: 0
+  },
+  "4lm8jk3ym7mf1p33lnez": {
+    id: '4lm8jk3ym7mf1p33lnez',
+    timestamp: 1468479778190,
+    title: 'Let us check out promises',
+    body: 'Promises are interesting topic in the javascript. Udacity has very good training for understanding it.',
+    author: 'thingthree',
+    category: 'udacity',
+    voteScore: 4,
+    deleted: false,
+    commentCount: 0
   }
 }
 

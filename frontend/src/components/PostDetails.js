@@ -1,5 +1,5 @@
 import React from 'react';
-import CommentFrom from './CommentForm';
+import CommentForm from './CommentForm';
 import CommentsView from './CommentsView';
 
 export default function PostDetails() {
@@ -10,7 +10,7 @@ export default function PostDetails() {
       <h1 className="mt-4">Post Title</h1>
       <p className="lead">
         by
-                <a href="#">Start Bootstrap</a>
+                <a href="self">Start Bootstrap</a>
       </p>
       <hr />
       <p>Posted on January 1, 2017 at 12:00 PM</p>
@@ -36,7 +36,7 @@ export default function PostDetails() {
 
       <CommentForm />
 
-      <Commentsview />
+      <CommentsView />
 
     </div>
   )

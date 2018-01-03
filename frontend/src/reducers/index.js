@@ -11,7 +11,7 @@ import {
 } from '../actions/types';
 
 
-function blogPost(state={}, action) {
+function blog(state={category: "all"}, action) {
   switch(action.type) {
     case GET_CATEGORIES:
       return {...state,
@@ -19,6 +19,7 @@ function blogPost(state={}, action) {
     case GET_POSTS:
       console.log('action',action);
       return {...state,
+        category: action.category,
         posts: action.posts};
     case FETCH_POST:
       return state;
@@ -37,7 +38,7 @@ function blogPost(state={}, action) {
   }
 }
 
-function comment(state={}, action) {
+function post(state={}, action) {
   switch(action.type) {
     case ADD_COMMENT:
       return state;
@@ -47,6 +48,6 @@ function comment(state={}, action) {
 }
 
 export default combineReducers ({
-  blogPost,
-  comment
+  blog,
+  post
 });
