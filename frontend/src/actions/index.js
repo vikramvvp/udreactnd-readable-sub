@@ -25,6 +25,8 @@ export function selectCategory(category) {
   return {type: SELECT_CATEGORY, payload: category}
 }
 
+
+
 export function loadCategories() {  
   return function(dispatch, getState) {
     fetch(`${ROOT_URL}/categories`, AUTH_HEADER)
@@ -68,18 +70,9 @@ export function loadPosts(category) {
   }
 }
 
-export function sortPosts(sortField, sortOrder) {
+export function fetchPost(postid) {
   return function(dispatch, getState) {
-    const state = getState();
-    const posts = _.orderBy(state.blog.posts, [sortField], [sortOrder]);
-    dispatch({type: GET_POSTS, posts, category: state.blog.category});
-  };
-}
-
-// Incomplete
-export function fetchPost() {
-  return function(dispatch, getState) {
-    return fetch(`${ROOT_URL}/categories`, AUTH_HEADER)
+    return fetch(`${ROOT_URL}/posts/${postid}`, AUTH_HEADER)
     .then(result => {
       if (result.status === 200) {
         return result.json();
@@ -87,7 +80,7 @@ export function fetchPost() {
       throw new Error("request failed");
     })
     .then(jsonResult => {
-      dispatch({type: FETCH_POST, categories: jsonResult});
+      dispatch({type: FETCH_POST, payload: jsonResult});
     })
     .catch(err => {
       console.log(err);
@@ -153,7 +146,7 @@ export function addComment() {
   }
 }
 
-export function addVote() {
+export function updateVote(direction) {
   return function(dispatch, getState) {
     return fetch(`${ROOT_URL}/categories`, AUTH_HEADER)
     .then(result => {

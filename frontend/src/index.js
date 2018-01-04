@@ -30,6 +30,7 @@ ReactDOM.render(
       <div className='container'>
         <Switch>
           <Route path="/posts/new" component={PostAddEdit} />
+          <Route path="/posts/edit/:id" component={PostAddEdit} />
           <Route path="/posts/:id" component={PostDetails} />
           <Route exact path="/" component={DefaultView} />
         </Switch>

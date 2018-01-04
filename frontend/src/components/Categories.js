@@ -8,17 +8,19 @@ const Categories = ({ categories, category, onSelectCategory }) => (
       <div className="row">
         <div className="col-lg-6">
           <ul className="list-unstyled mb-0">
-            {category === 'all' ? <li><span>all</span></li> : 
-            <li><a href='' key='all'
-              onClick={(e) => {
-                e.preventDefault();
-                onSelectCategory('all');
-              }}>
-              all
-            </a></li>}
+            <li key='all'>
+              {category === 'all' ? <span>all</span> : 
+                <a href=''
+                  onClick={(e) => {
+                    e.preventDefault();
+                    onSelectCategory('all');
+                  }}>
+                  all
+                </a>}
+            </li>
             {_.map(categories, ({name, path}) => (
-              category === name ? <span>{name}</span> : 
-              <li><a href='' key={name}
+              category === name ? <span key={name}>{name}</span> : 
+              <li key={name}><a href=''
                 onClick={(e) => {
                   e.preventDefault();
                   onSelectCategory(path);

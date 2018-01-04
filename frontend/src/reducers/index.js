@@ -34,7 +34,9 @@ function blog(state={category: "all", sortCriteria:{sortField:"title", sortOrder
         category: action.payload
       }
     case FETCH_POST:
-      return state;
+      return {...state, 
+        post: action.payload
+      }
     case UPDATE_POST:
       return state;
     case CREATE_POST:
@@ -50,16 +52,8 @@ function blog(state={category: "all", sortCriteria:{sortField:"title", sortOrder
   }
 }
 
-function post(state={}, action) {
-  switch(action.type) {
-    case ADD_COMMENT:
-      return state;
-    default:
-      return state;
-  }
-}
+
 
 export default combineReducers ({
-  blog,
-  post
+  blog
 });

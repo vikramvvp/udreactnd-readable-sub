@@ -22,7 +22,7 @@ const PostsList = ({ posts, category, onSortCriteriaChange }) => {
         {!posts ? <span>Posts not found</span> :_.map(posts, post => (
         <div className="card mb-4" key={post.id}>
           <div className="card-body">
-            <Link to={`/post?id=${post.id}/`}><h2 className="card-title">{post.title}</h2></Link>
+            <Link to={`/posts/${post.id}/`}><h2 className="card-title">{post.title}</h2></Link>
             <p className="card-text">{post.body.substr(0, 150) + '...'}</p>
           </div>
           <div className="card-footer text-muted">
