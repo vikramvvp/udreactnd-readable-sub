@@ -11,7 +11,7 @@ class VisiblePostsList extends React.Component {
 
   render() {
     return ( 
-      <PostsList posts={this.props.posts} onSortCriteriaChange={this.props.onSortCriteriaChange} />
+      <PostsList posts={this.props.posts} category={this.props.category} onSortCriteriaChange={this.props.onSortCriteriaChange} />
     )
   }
 }
@@ -41,9 +41,3 @@ const mapDispatchToProps = (dispatch) => {
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(VisiblePostsList)
-// const VisiblePostsList = connect(
-//   mapStateToProps,
-//   mapDispatchToProps
-// )(PostsList)
-
-//export default VisiblePostsList

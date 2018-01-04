@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
-import Categories from './Categories';
+import CategoriesList from '../containers/CategoriesList';
 import VisiblePostsList from '../containers/VisiblePostsList';
 
 class DefaultView extends Component {
@@ -16,7 +16,7 @@ class DefaultView extends Component {
               </span>
             </div>
           </div>
-          <Categories />
+          <CategoriesList />
         </div>
       </div>
     );

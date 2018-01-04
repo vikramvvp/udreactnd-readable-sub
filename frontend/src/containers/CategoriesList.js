@@ -1,24 +1,32 @@
+import React from 'react'
 import { connect } from 'react-redux'
-import { setVisibilityFilter } from '../actions'
-import Link from '../components/Link'
+import { loadCategories, selectCategory } from '../actions'
+import Categories from '../components/Categories'
 
-const mapStateToProps = (state, ownProps) => {
-  return {
-    active: ownProps.filter === state.visibilityFilter
+class CategoriesList extends React.Component {
+  componentDidMount() {
+    this.props.onCatLoad();
+  }
+
+  render() {
+    return ( 
+      <Categories categories={this.props.categories} category={this.props.category} onSelectCategory={this.props.onSelectCateogry} />
+    )
   }
 }
 
-const mapDispatchToProps = (dispatch, ownProps) => {
+const mapStateToProps = (state) => {
   return {
-    onClick: () => {
-      dispatch(setVisibilityFilter(ownProps.filter))
-    }
+    category: state.blog.category,
+    categories: state.blog.categories
   }
 }
 
-const FilterLink = connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(Link)
+const mapDispatchToProps = (dispatch) => {
+  return {
+    onCatLoad: () => {dispatch(loadCategories())},
+    onSelectCateogry: (category) => {dispatch(selectCategory(category))}
+  }
+}
 
-export default FilterLink
+export default connect(mapStateToProps, mapDispatchToProps)(CategoriesList)

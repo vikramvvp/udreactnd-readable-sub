@@ -7,4 +7,5 @@ export const ADD_COMMENT = 'ADD_COMMENT';
 export const ADD_VOTE = 'ADD_VOTE';
 export const API_ERROR = 'API_ERROR';
 export const SELECT_SORTCRITERIA = 'SELECT_SORTCRITERIA';
+export const SELECT_CATEGORY = 'SELECT_CATEGORY';
 

@@ -8,7 +8,8 @@ import {
   ADD_COMMENT,
   ADD_VOTE,
   API_ERROR,
-  SELECT_SORTCRITERIA
+  SELECT_SORTCRITERIA,
+  SELECT_CATEGORY
 } from './types';
 
 const ROOT_URL = 'http://localhost:3001';
@@ -18,6 +19,10 @@ const AUTH_HEADER = {
 
 export function selectSortCriteria(sortCriteria) {
   return {type: SELECT_SORTCRITERIA, payload: sortCriteria}
+}
+
+export function selectCategory(category) {
+  return {type: SELECT_CATEGORY, payload: category}
 }
 
 export function loadCategories() {  

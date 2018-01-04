@@ -1,7 +1,5 @@
 import _ from 'lodash';
 import React from 'react'
-// import { loadPosts, sortPosts } from "../actions";
-// import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 import DarkThumbsUp from 'react-icons/lib/fa/thumbs-up';
 import DarkComments from 'react-icons/lib/fa/comments';
@@ -34,6 +32,5 @@ const PostsList = ({ posts, category, onSortCriteriaChange }) => {
       ))}
       </div>
   )}
-
 
 export default PostsList;

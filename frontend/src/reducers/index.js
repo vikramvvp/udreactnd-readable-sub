@@ -8,7 +8,8 @@ import {
   ADD_COMMENT,
   ADD_VOTE,
   API_ERROR,
-  SELECT_SORTCRITERIA
+  SELECT_SORTCRITERIA,
+  SELECT_CATEGORY
 } from '../actions/types';
 
 
@@ -28,6 +29,10 @@ function blog(state={category: "all", sortCriteria:{sortField:"title", sortOrder
           sortOrder: action.payload.split('|')[1]
         }
       };
+    case SELECT_CATEGORY:
+      return {...state, 
+        category: action.payload
+      }
     case FETCH_POST:
       return state;
     case UPDATE_POST:
