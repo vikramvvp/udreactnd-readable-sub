@@ -7,13 +7,18 @@ import {
   CREATE_POST,
   ADD_COMMENT,
   ADD_VOTE,
-  API_ERROR
+  API_ERROR,
+  SELECT_SORTCRITERIA
 } from './types';
 
 const ROOT_URL = 'http://localhost:3001';
 const AUTH_HEADER = {
   headers: { 'Authorization': 'vikrampatil' }
 };
+
+export function selectSortCriteria(sortCriteria) {
+  return {type: SELECT_SORTCRITERIA, payload: sortCriteria}
+}
 
 export function loadCategories() {  
   return function(dispatch, getState) {

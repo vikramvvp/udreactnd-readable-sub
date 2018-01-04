@@ -9,7 +9,7 @@ class CategoriesList extends Component {
   }
 
   render() {
-    console.log('this.props', this.props);
+    
     return (
       <div className="card my-4">
         <h5 className="card-header">Categories</h5>

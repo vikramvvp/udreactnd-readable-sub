@@ -1,13 +1,13 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
-import CategoriesList from './CategoriesList';
-import PostsList from './PostsList';
+import Categories from './Categories';
+import VisiblePostsList from '../containers/VisiblePostsList';
 
 class DefaultView extends Component {
   render() {
     return (
       <div className="row">
-        <PostsList />
+        <VisiblePostsList />
         <div className="col-md-4">
           <div className="card my-4">
             <div className="card-body">
@@ -16,7 +16,7 @@ class DefaultView extends Component {
               </span>
             </div>
           </div>
-          <CategoriesList />
+          <Categories />
         </div>
       </div>
     );

@@ -31,7 +31,7 @@ ReactDOM.render(
         <Switch>
           <Route path="/posts/new" component={PostAddEdit} />
           <Route path="/posts/:id" component={PostDetails} />
-          <Route path="/" component={DefaultView} />
+          <Route exact path="/" component={DefaultView} />
         </Switch>
       </div>
     </BrowserRouter>

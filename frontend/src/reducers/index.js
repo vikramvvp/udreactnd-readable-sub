@@ -7,20 +7,27 @@ import {
   CREATE_POST,
   ADD_COMMENT,
   ADD_VOTE,
-  API_ERROR
+  API_ERROR,
+  SELECT_SORTCRITERIA
 } from '../actions/types';
 
 
-function blog(state={category: "all"}, action) {
+function blog(state={category: "all", sortCriteria:{sortField:"title", sortOrder:"asc"}}, action) {
   switch(action.type) {
     case GET_CATEGORIES:
       return {...state,
         categories: action.payload.categories};
     case GET_POSTS:
-      console.log('action',action);
       return {...state,
         category: action.category,
         posts: action.posts};
+    case SELECT_SORTCRITERIA:
+      return {...state,
+        sortCriteria: { 
+          sortField: action.payload.split('|')[0], 
+          sortOrder: action.payload.split('|')[1]
+        }
+      };
     case FETCH_POST:
       return state;
     case UPDATE_POST:
