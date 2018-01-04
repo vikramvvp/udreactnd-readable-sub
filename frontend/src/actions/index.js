@@ -3,13 +3,11 @@ import {
   GET_CATEGORIES,
   GET_POSTS,
   FETCH_POST,
-  UPDATE_POST,
-  CREATE_POST,
-  ADD_COMMENT,
   ADD_VOTE,
   API_ERROR,
   SELECT_SORTCRITERIA,
-  SELECT_CATEGORY
+  SELECT_CATEGORY,
+  FETCH_COMMENTS
 } from './types';
 
 const ROOT_URL = 'http://localhost:3001';
@@ -24,8 +22,6 @@ export function selectSortCriteria(sortCriteria) {
 export function selectCategory(category) {
   return {type: SELECT_CATEGORY, payload: category}
 }
-
-
 
 export function loadCategories() {  
   return function(dispatch, getState) {
@@ -89,9 +85,9 @@ export function fetchPost(postid) {
   }
 }
 
-export function createPost() {
+export function fetchComments(postid) {
   return function(dispatch, getState) {
-    return fetch(`${ROOT_URL}/categories`, AUTH_HEADER)
+    return fetch(`${ROOT_URL}/posts/${postid}/comments`, AUTH_HEADER)
     .then(result => {
       if (result.status === 200) {
         return result.json();
@@ -99,45 +95,7 @@ export function createPost() {
       throw new Error("request failed");
     })
     .then(jsonResult => {
-      dispatch({type: CREATE_POST, categories: jsonResult});
-    })
-    .catch(err => {
-      console.log(err);
-      dispatch(apiError('Error in getting categories'));
-    });
-  }
-}
-
-export function updatePost() {
-  return function(dispatch, getState) {
-    return fetch(`${ROOT_URL}/categories`, AUTH_HEADER)
-    .then(result => {
-      if (result.status === 200) {
-        return result.json();
-      }
-      throw new Error("request failed");
-    })
-    .then(jsonResult => {
-      dispatch({type: UPDATE_POST, categories: jsonResult});
-    })
-    .catch(err => {
-      console.log(err);
-      dispatch(apiError('Error in getting categories'));
-    });
-  }
-}
-
-export function addComment() {
-  return function(dispatch, getState) {
-    return fetch(`${ROOT_URL}/categories`, AUTH_HEADER)
-    .then(result => {
-      if (result.status === 200) {
-        return result.json();
-      }
-      throw new Error("request failed");
-    })
-    .then(jsonResult => {
-      dispatch({type: ADD_COMMENT, categories: jsonResult});
+      dispatch({type: FETCH_COMMENTS, payload: jsonResult});
     })
     .catch(err => {
       console.log(err);

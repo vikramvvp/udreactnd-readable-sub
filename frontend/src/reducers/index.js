@@ -3,13 +3,10 @@ import {
   GET_CATEGORIES,
   GET_POSTS,
   FETCH_POST,
-  UPDATE_POST,
-  CREATE_POST,
-  ADD_COMMENT,
-  ADD_VOTE,
-  API_ERROR,
+  FETCH_COMMENTS,
   SELECT_SORTCRITERIA,
-  SELECT_CATEGORY
+  SELECT_CATEGORY,
+  API_ERROR,
 } from '../actions/types';
 
 
@@ -37,14 +34,11 @@ function blog(state={category: "all", sortCriteria:{sortField:"title", sortOrder
       return {...state, 
         post: action.payload
       }
-    case UPDATE_POST:
-      return state;
-    case CREATE_POST:
-      return state;
-    case ADD_COMMENT:
-      return state;
-    case ADD_VOTE:
-      return state;
+    case FETCH_COMMENTS:
+      console.log('action', action)
+      return {...state, 
+        comments: action.payload
+      };
     case API_ERROR:
       return state;
     default:

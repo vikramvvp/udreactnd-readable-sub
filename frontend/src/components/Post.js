@@ -12,21 +12,19 @@ export default function Post({ post, onUpdateVoteScore }) {
         </p>
         <hr />
         <p>
-          Posted on Posted on {(new Date(post.timestamp)).toUTCString()} by {post.author}
-        </p>
-        <hr />
-        <p>
-          <button
-            className='icon-btn'
-            onClick={onUpdateVoteScore('up')}>
-            <FaThumbsOUp size={30} />
-          </button>&nbsp;&nbsp;
+          Posted on {(new Date(post.timestamp)).toUTCString()} 
+          &nbsp;&nbsp;&#124;&nbsp;&nbsp;
+          <a href="" role="button"
+            className='btn btn-outline-primary'
+            onClick={onUpdateVoteScore('up', post.id)}>
+            <FaThumbsOUp size={25} />
+          </a>&nbsp;&nbsp;
         <span>{post.voteScore}</span>&nbsp;&nbsp;
-        <button
-            className='icon-btn'
-            onClick={onUpdateVoteScore('down')}>
-            <FaThumbsODown size={30} />
-          </button>
+        <a href="" role="button"
+            className='btn btn-outline-primary'
+            onClick={onUpdateVoteScore('down', post.id)}>
+            <FaThumbsODown size={25} />
+          </a>
         </p>
         <hr />
         <p >{post.body}</p>
