@@ -3,11 +3,12 @@ import {
   GET_CATEGORIES,
   GET_POSTS,
   FETCH_POST,
-  ADD_VOTE,
+  GET_COMMENTS,
+  FETCH_COMMENT,
   API_ERROR,
   SELECT_SORTCRITERIA,
   SELECT_CATEGORY,
-  FETCH_COMMENTS
+  
 } from './types';
 
 const ROOT_URL = 'http://localhost:3001';
@@ -85,7 +86,7 @@ export function fetchPost(postid) {
   }
 }
 
-export function fetchComments(postid) {
+export function getComments(postid) {
   return function(dispatch, getState) {
     return fetch(`${ROOT_URL}/posts/${postid}/comments`, AUTH_HEADER)
     .then(result => {
@@ -95,7 +96,7 @@ export function fetchComments(postid) {
       throw new Error("request failed");
     })
     .then(jsonResult => {
-      dispatch({type: FETCH_COMMENTS, payload: jsonResult});
+      dispatch({type: GET_COMMENTS, payload: jsonResult});
     })
     .catch(err => {
       console.log(err);
@@ -104,9 +105,9 @@ export function fetchComments(postid) {
   }
 }
 
-export function updateVote(direction) {
+export function fetchComment(commentid) {
   return function(dispatch, getState) {
-    return fetch(`${ROOT_URL}/categories`, AUTH_HEADER)
+    return fetch(`${ROOT_URL}/comments/${commentid}`, AUTH_HEADER)
     .then(result => {
       if (result.status === 200) {
         return result.json();
@@ -114,7 +115,7 @@ export function updateVote(direction) {
       throw new Error("request failed");
     })
     .then(jsonResult => {
-      dispatch({type: ADD_VOTE, categories: jsonResult});
+      dispatch({type: FETCH_COMMENT, payload: jsonResult});
     })
     .catch(err => {
       console.log(err);
@@ -123,6 +124,59 @@ export function updateVote(direction) {
   }
 }
 
+export function updatePostVote(direction, postid) {
+  const options = {
+    headers: { 'Authorization': 'vikrampatil',
+      'Accept': 'application/json, text/plain, */*',
+      'Content-Type': 'application/json'
+    },
+    method: 'POST',
+    body: JSON.stringify({option: direction})}
+  return function(dispatch, getState) {
+    return fetch(`${ROOT_URL}/posts/${postid}`, options)
+    .then(result => {
+      if (result.status === 200) {
+        return result.json();
+      }
+      throw new Error("request failed");
+    })
+    .then(jsonResult => {
+      dispatch({type: FETCH_POST, payload: jsonResult});
+    })
+    .catch(err => {
+      console.log(err);
+      dispatch(apiError('Error in getting categories'));
+    });
+  }
+}
+
+export function updateCommentVote(direction, commentid) {
+  const options = {
+    headers: { 'Authorization': 'vikrampatil',
+      'Accept': 'application/json, text/plain, */*',
+      'Content-Type': 'application/json'
+    },
+    method: 'POST',
+    body: JSON.stringify({option: direction})}
+  return function(dispatch, getState) {
+    let {blog} = getState();
+    return fetch(`${ROOT_URL}/comments/${commentid}`, options)
+    .then(result => {
+      if (result.status === 200) {
+        return result.json();
+      }
+      throw new Error("request failed");
+    })
+    .then(comment => {
+      //console.log('jsonResult',jsonResult);
+      dispatch({type: GET_COMMENTS, payload: blog.comments.filter(c => c.id !== comment.id).concat([comment])});
+    })
+    .catch(err => {
+      console.log(err);
+      dispatch(apiError('Error in getting categories'));
+    });
+  }
+}
 
 export function apiError(error) {
   return {

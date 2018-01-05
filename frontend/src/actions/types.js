@@ -1,12 +1,13 @@
 export const GET_CATEGORIES = 'GET_CATEGORIES';
 export const GET_POSTS = 'GET_POSTS';
 export const FETCH_POST = 'FETCH_POST';
+export const GET_COMMENTS = 'GET_COMMENTS';
+export const FETCH_COMMENT = 'FETCH_COMMENT';
 export const UPDATE_POST = 'UPDATE_POST';
 export const CREATE_POST = 'CREATE_POST';
 export const ADD_COMMENT = 'ADD_COMMENT';
-export const ADD_VOTE = 'ADD_VOTE';
 export const API_ERROR = 'API_ERROR';
 export const SELECT_SORTCRITERIA = 'SELECT_SORTCRITERIA';
 export const SELECT_CATEGORY = 'SELECT_CATEGORY';
-export const FETCH_COMMENTS = 'FETCH_COMMENTS';
+
 

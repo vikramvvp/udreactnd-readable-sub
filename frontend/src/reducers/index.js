@@ -1,9 +1,11 @@
+import _ from 'lodash';
 import { combineReducers } from 'redux';
 import {
   GET_CATEGORIES,
   GET_POSTS,
   FETCH_POST,
-  FETCH_COMMENTS,
+  GET_COMMENTS,
+  FETCH_COMMENT,
   SELECT_SORTCRITERIA,
   SELECT_CATEGORY,
   API_ERROR,
@@ -19,6 +21,17 @@ function blog(state={category: "all", sortCriteria:{sortField:"title", sortOrder
       return {...state,
         category: action.category,
         posts: action.posts};
+    case FETCH_POST:
+      return {...state, 
+        post: action.payload
+      }
+    case GET_COMMENTS:
+      let comments = action.payload;
+      return {...state, 
+        comments: _.orderBy(comments, ['timestamp','author','body'], ['desc','asc','asc'])
+      };
+    case FETCH_COMMENT:
+      return state;
     case SELECT_SORTCRITERIA:
       return {...state,
         sortCriteria: { 
@@ -30,15 +43,8 @@ function blog(state={category: "all", sortCriteria:{sortField:"title", sortOrder
       return {...state, 
         category: action.payload
       }
-    case FETCH_POST:
-      return {...state, 
-        post: action.payload
-      }
-    case FETCH_COMMENTS:
-      console.log('action', action)
-      return {...state, 
-        comments: action.payload
-      };
+    
+    
     case API_ERROR:
       return state;
     default:

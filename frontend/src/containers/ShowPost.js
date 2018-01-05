@@ -1,6 +1,6 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import { updateVote, fetchPost } from '../actions'
+import { updatePostVote, fetchPost } from '../actions'
 import Post from '../components/Post';
 import { withRouter } from 'react-router'
 
@@ -25,7 +25,7 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch, ownProps) => {
   return {
     onPostLoad: (postid) => {dispatch(fetchPost(postid))},
-    onUpdateVoteScore: (direction,id) => {dispatch(updateVote(direction,id))}
+    onUpdateVoteScore: (direction,id) => {dispatch(updatePostVote(direction,id))}
   }
 }
 

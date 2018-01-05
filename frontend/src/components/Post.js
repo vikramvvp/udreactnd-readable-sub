@@ -16,13 +16,13 @@ export default function Post({ post, onUpdateVoteScore }) {
           &nbsp;&nbsp;&#124;&nbsp;&nbsp;
           <a href="" role="button"
             className='btn btn-outline-primary'
-            onClick={onUpdateVoteScore('up', post.id)}>
+            onClick={(e) => { e.preventDefault(); onUpdateVoteScore('upVote', post.id)}}>
             <FaThumbsOUp size={25} />
           </a>&nbsp;&nbsp;
         <span>{post.voteScore}</span>&nbsp;&nbsp;
         <a href="" role="button"
             className='btn btn-outline-primary'
-            onClick={onUpdateVoteScore('down', post.id)}>
+            onClick={(e) => { e.preventDefault(); onUpdateVoteScore('downVote', post.id)}}>
             <FaThumbsODown size={25} />
           </a>
         </p>
