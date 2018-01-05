@@ -1,5 +1,7 @@
 import _ from 'lodash';
 import { combineReducers } from 'redux';
+import { reducer as reduxFormReducer } from 'redux-form'
+
 import {
   GET_CATEGORIES,
   GET_POSTS,
@@ -9,6 +11,7 @@ import {
   SELECT_SORTCRITERIA,
   SELECT_CATEGORY,
   API_ERROR,
+  SELECT_COMMENT_TO_EDIT
 } from '../actions/types';
 
 
@@ -43,8 +46,10 @@ function blog(state={category: "all", sortCriteria:{sortField:"title", sortOrder
       return {...state, 
         category: action.payload
       }
-    
-    
+    case SELECT_COMMENT_TO_EDIT:
+      return {...state,
+        commentToEdit: action.payload
+      }
     case API_ERROR:
       return state;
     default:
@@ -55,5 +60,6 @@ function blog(state={category: "all", sortCriteria:{sortField:"title", sortOrder
 
 
 export default combineReducers ({
-  blog
+  blog,
+  form: reduxFormReducer
 });

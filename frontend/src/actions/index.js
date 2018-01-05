@@ -8,7 +8,7 @@ import {
   API_ERROR,
   SELECT_SORTCRITERIA,
   SELECT_CATEGORY,
-  
+  SELECT_COMMENT_TO_EDIT  
 } from './types';
 
 const ROOT_URL = 'http://localhost:3001';
@@ -22,6 +22,25 @@ export function selectSortCriteria(sortCriteria) {
 
 export function selectCategory(category) {
   return {type: SELECT_CATEGORY, payload: category}
+}
+
+export function editComment(commentid) {
+  return function(dispatch, getState) {
+    let state = getState();
+    return {type: SELECT_COMMENT_TO_EDIT, payload: state.blog.comments.filter(c => c.id ===commentid)}
+  }
+}
+
+export function saveComment(comment) {
+  return {type: SELECT_COMMENT_TO_EDIT, payload: comment}
+}
+
+export function deleteComment(comment) {
+  return {type: SELECT_COMMENT_TO_EDIT, payload: comment}
+}
+
+export function commentReset(comment) {
+  return {type: SELECT_COMMENT_TO_EDIT, payload: comment}
 }
 
 export function loadCategories() {  
