@@ -7,8 +7,7 @@ import {
   FETCH_COMMENT,
   API_ERROR,
   SELECT_SORTCRITERIA,
-  SELECT_CATEGORY,
-  SELECT_COMMENT_TO_EDIT  
+  SELECT_CATEGORY
 } from './types';
 
 const ROOT_URL = 'http://localhost:3001';
@@ -24,23 +23,75 @@ export function selectCategory(category) {
   return {type: SELECT_CATEGORY, payload: category}
 }
 
-export function editComment(commentid) {
+export function deleteComment(commentid) {
+  let options = {
+      headers: { 'Authorization': 'vikrampatil',
+        'Accept': 'application/json, text/plain, */*',
+        'Content-Type': 'application/json'
+      },
+      method: 'DELETE'
+  }
+   
   return function(dispatch, getState) {
-    let state = getState();
-    return {type: SELECT_COMMENT_TO_EDIT, payload: state.blog.comments.filter(c => c.id ===commentid)}
+    let { blog } = getState();
+    return fetch(`${ROOT_URL}/comments/${commentid}`, options)
+    .then(result => {
+      if (result.status === 200) {
+        return result.json();
+      }
+      throw new Error("request failed");
+    })
+    .then(comment => {
+      dispatch({type: GET_COMMENTS, payload: blog.comments.filter(c => c.id !== comment.id)});
+    })
+    .catch(err => {
+      console.log(err);
+      dispatch(apiError('Error in getting categories'));
+    });
   }
 }
 
-export function saveComment(comment) {
-  return {type: SELECT_COMMENT_TO_EDIT, payload: comment}
-}
 
-export function deleteComment(comment) {
-  return {type: SELECT_COMMENT_TO_EDIT, payload: comment}
-}
-
-export function commentReset(comment) {
-  return {type: SELECT_COMMENT_TO_EDIT, payload: comment}
+export function saveComment(saveType, comment, postid) {
+  let url = '', options = {};
+  if (saveType === 'edit') {
+    url = `${ROOT_URL}/comments/${comment.id}`
+    options = {
+      headers: { 'Authorization': 'vikrampatil',
+        'Accept': 'application/json, text/plain, */*',
+        'Content-Type': 'application/json'
+      },
+      method: 'PUT',
+      body: JSON.stringify({timestamp:Date.now(), body:comment.body})}
+  }
+  else {
+    url = `${ROOT_URL}/comments`
+    options = {
+      headers: { 'Authorization': 'vikrampatil',
+        'Accept': 'application/json, text/plain, */*',
+        'Content-Type': 'application/json'
+      },
+      method: 'POST',
+      body: JSON.stringify({id: comment.id, timestamp:Date.now(), body:comment.body, author: comment.author, parentId:postid})}
+  }
+   
+  return function(dispatch, getState) {
+    let { blog } = getState();
+    return fetch(url, options)
+    .then(result => {
+      if (result.status === 200) {
+        return result.json();
+      }
+      throw new Error("request failed");
+    })
+    .then(comment => {
+      dispatch({type: GET_COMMENTS, payload: blog.comments.filter(c => c.id !== comment.id).concat([comment])});
+    })
+    .catch(err => {
+      console.log(err);
+      dispatch(apiError('Error in getting categories'));
+    });
+  }
 }
 
 export function loadCategories() {  

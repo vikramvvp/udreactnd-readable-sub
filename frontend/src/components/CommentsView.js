@@ -56,7 +56,7 @@ class CommentsView extends Component {
   }
 
   render(){
-   let { comments, onUpdateVoteScore, onEditComment, commentToEdit, onDeleteComment, onSaveComment, onReset } = this.props;
+   let { comments, onUpdateVoteScore, onDeleteComment, onSaveComment } = this.props;
    let {commentModalOpen} = this.state;
   return (
     <div>
@@ -103,12 +103,12 @@ class CommentsView extends Component {
         </div>
       </div>
       <Modal
-        style='customStyles'
+        style={customStyles}
         isOpen={this.state.commentModalOpen}
         onRequestClose={this.closeCommentModal}
         contentLabel='Modal'
       >
-      <CommentForm comment={this.state.comment} onSubmit={onSaveComment} onReset={this.closeCommentModal} />
+      {commentModalOpen && <CommentForm comment={this.state.comment} onSubmit={onSaveComment} onReset={this.closeCommentModal} />}
       </Modal>
     </div>
   )

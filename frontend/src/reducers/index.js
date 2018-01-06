@@ -10,8 +10,7 @@ import {
   FETCH_COMMENT,
   SELECT_SORTCRITERIA,
   SELECT_CATEGORY,
-  API_ERROR,
-  SELECT_COMMENT_TO_EDIT
+  API_ERROR
 } from '../actions/types';
 
 
@@ -45,10 +44,6 @@ function blog(state={category: "all", sortCriteria:{sortField:"title", sortOrder
     case SELECT_CATEGORY:
       return {...state, 
         category: action.payload
-      }
-    case SELECT_COMMENT_TO_EDIT:
-      return {...state,
-        commentToEdit: action.payload
       }
     case API_ERROR:
       return state;
