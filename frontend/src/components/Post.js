@@ -1,8 +1,9 @@
-import React from 'react'
+import React from 'react';
+import PropTypes from 'prop-types';
 import FaThumbsOUp from 'react-icons/lib/fa/thumbs-o-up';
 import FaThumbsODown from 'react-icons/lib/fa/thumbs-o-down';
 
-export default function Post({ post, onUpdateVoteScore }) {
+const Post = ({ post, onUpdateVoteScore }) => {
   if (post) {
     return (
       <div>
@@ -37,4 +38,9 @@ export default function Post({ post, onUpdateVoteScore }) {
   }
 }
 
+Post.propTypes = {
+  post: PropTypes.object.isRequired,
+  onUpdateVoteScore: PropTypes.func.isRequired
+}
 
+export default Post

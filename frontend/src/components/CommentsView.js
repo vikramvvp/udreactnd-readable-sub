@@ -1,6 +1,7 @@
 import React,{ Component } from 'react';
 import Modal from 'react-modal';
 import _ from 'lodash';
+import PropTypes from 'prop-types';
 import FaThumbsOUp from 'react-icons/lib/fa/thumbs-o-up';
 import FaThumbsODown from 'react-icons/lib/fa/thumbs-o-down';
 import CommentForm from './CommentForm'
@@ -113,6 +114,13 @@ class CommentsView extends Component {
     </div>
   )
   }
+}
+
+CommentsView.propTYpes = {
+  comments: PropTypes.array.isRequired, 
+  onUpdateVoteScore: PropTypes.func.isRequired, 
+  onDeleteComment: PropTypes.func.isRequired, 
+  onSaveComment: PropTypes.func.isRequired, 
 }
 
 export default CommentsView

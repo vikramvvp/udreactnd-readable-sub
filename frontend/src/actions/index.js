@@ -5,7 +5,6 @@ import {
   GET_POSTS,
   FETCH_POST,
   GET_COMMENTS,
-  FETCH_COMMENT,
   API_ERROR,
   SELECT_SORTCRITERIA,
   SELECT_CATEGORY
@@ -25,7 +24,6 @@ export function selectCategory(category) {
 }
 
 export function deletePost(postid) {
-
   let options = {
     headers: {
       'Authorization': 'vikrampatil',
@@ -99,7 +97,6 @@ export function savePost(saveType, post) {
   }
 }
 
-
 export function deleteComment(commentid) {
   let options = {
     headers: {
@@ -128,7 +125,6 @@ export function deleteComment(commentid) {
       });
   }
 }
-
 
 export function saveComment(saveType, comment, postid) {
   let url = '', options = {};
@@ -249,25 +245,6 @@ export function getComments(postid) {
       })
       .then(jsonResult => {
         dispatch({ type: GET_COMMENTS, payload: jsonResult });
-      })
-      .catch(err => {
-        console.log(err);
-        dispatch(apiError('Error in getting categories'));
-      });
-  }
-}
-
-export function fetchComment(commentid) {
-  return function (dispatch, getState) {
-    return fetch(`${ROOT_URL}/comments/${commentid}`, AUTH_HEADER)
-      .then(result => {
-        if (result.status === 200) {
-          return result.json();
-        }
-        throw new Error("request failed");
-      })
-      .then(jsonResult => {
-        dispatch({ type: FETCH_COMMENT, payload: jsonResult });
       })
       .catch(err => {
         console.log(err);

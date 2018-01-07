@@ -7,7 +7,6 @@ import {
   GET_POSTS,
   FETCH_POST,
   GET_COMMENTS,
-  FETCH_COMMENT,
   SELECT_SORTCRITERIA,
   SELECT_CATEGORY,
   API_ERROR
@@ -32,8 +31,6 @@ function blog(state={category: "all", sortCriteria:{sortField:"title", sortOrder
       return {...state, 
         comments: _.orderBy(comments, ['timestamp','author','body'], ['desc','asc','asc'])
       };
-    case FETCH_COMMENT:
-      return state;
     case SELECT_SORTCRITERIA:
       return {...state,
         sortCriteria: { 

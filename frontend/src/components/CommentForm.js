@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
-import uuidv4 from 'uuid/v4'
+import uuidv4 from 'uuid/v4';
+import PropTypes from 'prop-types';
 
 class CommentForm extends Component {
   state = {
@@ -67,6 +68,12 @@ class CommentForm extends Component {
       </div>
     )
   }
+}
+
+CommentForm.propTypes = {
+  comment: PropTypes.object.isRequired,
+  onSubmit: PropTypes.func.isRequired,
+  onReset: PropTypes.func.isRequired
 }
 
 export default CommentForm;

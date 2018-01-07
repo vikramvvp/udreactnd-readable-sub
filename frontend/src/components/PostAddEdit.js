@@ -1,5 +1,6 @@
 import _ from 'lodash'
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import uuidv4 from 'uuid/v4'
 
 class PostAddEdit extends Component {
@@ -96,6 +97,13 @@ class PostAddEdit extends Component {
       </div>
     )
   }
+}
+
+PostAddEdit.propTypes = {
+  post: PropTypes.object.isRequired,
+  categories: PropTypes.array.isRequired,
+  onSavePost: PropTypes.func.isRequired,
+  onReset: PropTypes.func.isRequired
 }
 
 export default PostAddEdit;

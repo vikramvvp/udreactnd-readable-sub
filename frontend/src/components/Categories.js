@@ -1,5 +1,6 @@
 import _ from 'lodash';
-import React from 'react'
+import React from 'react';
+import {PropTypes} from 'prop-types';
 
 const Categories = ({ categories, category, onSelectCategory }) => (
   <div className="card my-4">
@@ -34,5 +35,11 @@ const Categories = ({ categories, category, onSelectCategory }) => (
     </div>
   </div>
 )
+
+Categories.propTypes = {
+  categories: PropTypes.array.isRequired,
+  category: PropTypes.string.isRequired,
+  onSelectCategory: PropTypes.func.isRequired
+}
 
 export default Categories;

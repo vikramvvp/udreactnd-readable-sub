@@ -1,5 +1,6 @@
 import _ from 'lodash';
-import React from 'react'
+import React from 'react';
+import PropTypes from 'prop-types';
 import { Link } from "react-router-dom";
 import DarkThumbsUp from 'react-icons/lib/fa/thumbs-up';
 import DarkComments from 'react-icons/lib/fa/comments';
@@ -19,7 +20,7 @@ const PostsList = ({ posts, category, onSortCriteriaChange }) => {
           <option value="timestamp|desc">Date Time - descending</option>
         </select>
         </div>
-        {!posts ? <span>Posts not found</span> :_.map(posts, post => (
+        {!posts || posts.length === 0 ? <span>Posts not found</span> :_.map(posts, post => (
         <div className="card mb-4" key={post.id}>
           <div className="card-body">
             <Link to={`/posts/${post.id}/`}><h2 className="card-title">{post.title}</h2></Link>
@@ -32,5 +33,11 @@ const PostsList = ({ posts, category, onSortCriteriaChange }) => {
       ))}
       </div>
   )}
+
+PostsList.propTypes = {
+  posts: PropTypes.array.isRequired,
+  category: PropTypes.string.isRequired,
+  onSortCriteriaChange: PropTypes.func.isRequired
+}
 
 export default PostsList;

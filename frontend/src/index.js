@@ -22,13 +22,10 @@ import registerServiceWorker from './registerServiceWorker';
 
 // Create a history of your choosing (we're using a browser history in this case)
 const history = createHistory()
-
-//const initialState = {category: "all", sortCriteria:{sortField:"title", sortOrder:"asc"}}
 const enhancers = []
+
 // Build the middleware for intercepting and dispatching navigation actions
 const middleware = [ thunk, routerMiddleware(history) ]
-
-//const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose
 
 if (process.env.NODE_ENV === 'development') {
   const devToolsExtension = window.devToolsExtension
@@ -43,16 +40,10 @@ const composedEnhancers = compose(
   ...enhancers
 )
 
-
 const store = createStore(
   reducer,
   composedEnhancers
-  // composeEnhancers(
-  //   applyMiddleware(middleware)
-  // )
 )
-
-//const store = createStore(reducer);
 
 ReactDOM.render(
   <Provider store={store} >
