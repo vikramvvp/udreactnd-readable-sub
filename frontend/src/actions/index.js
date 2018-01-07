@@ -1,14 +1,6 @@
 import _ from 'lodash';
 import { push } from 'react-router-redux'
-import {
-  GET_CATEGORIES,
-  GET_POSTS,
-  FETCH_POST,
-  GET_COMMENTS,
-  API_ERROR,
-  SELECT_SORTCRITERIA,
-  SELECT_CATEGORY
-} from './types';
+import * as type from './types';
 
 const ROOT_URL = 'http://localhost:3001';
 const AUTH_HEADER = {
@@ -16,11 +8,15 @@ const AUTH_HEADER = {
 };
 
 export function selectSortCriteria(sortCriteria) {
-  return { type: SELECT_SORTCRITERIA, payload: sortCriteria }
+  return { type: type.SELECT_SORTCRITERIA, payload: sortCriteria }
 }
 
 export function selectCategory(category) {
-  return { type: SELECT_CATEGORY, payload: category }
+  return function (dispatch, getState) {
+    dispatch({ type: type.SELECT_CATEGORY, payload: category })
+    dispatch(push(`/${category}`))
+  }
+  
 }
 
 export function deletePost(postid) {
@@ -117,7 +113,7 @@ export function deleteComment(commentid) {
         throw new Error("request failed");
       })
       .then(comment => {
-        dispatch({ type: GET_COMMENTS, payload: blog.comments.filter(c => c.id !== comment.id) });
+        dispatch({ type: type.GET_COMMENTS, payload: blog.comments.filter(c => c.id !== comment.id) });
       })
       .catch(err => {
         console.log(err);
@@ -163,7 +159,7 @@ export function saveComment(saveType, comment, postid) {
         throw new Error("request failed");
       })
       .then(comment => {
-        dispatch({ type: GET_COMMENTS, payload: blog.comments.filter(c => c.id !== comment.id).concat([comment]) });
+        dispatch({ type: type.GET_COMMENTS, payload: blog.comments.filter(c => c.id !== comment.id).concat([comment]) });
       })
       .catch(err => {
         console.log(err);
@@ -182,7 +178,7 @@ export function loadCategories() {
         throw new Error("request failed");
       })
       .then(jsonResult => {
-        dispatch({ type: GET_CATEGORIES, payload: jsonResult });
+        dispatch({ type: type.GET_CATEGORIES, payload: jsonResult });
       })
       .catch(err => {
         console.log(err);
@@ -206,7 +202,7 @@ export function loadPosts(category) {
       })
       .then(jsonResult => {
         const posts = _.orderBy(jsonResult, ['title'], ['asc']);
-        dispatch({ type: GET_POSTS, posts, category });
+        dispatch({ type: type.GET_POSTS, posts, category });
       })
       .catch(err => {
         console.log(err);
@@ -225,7 +221,7 @@ export function fetchPost(postid) {
         throw new Error("request failed");
       })
       .then(jsonResult => {
-        dispatch({ type: FETCH_POST, payload: jsonResult });
+        dispatch({ type: type.FETCH_POST, payload: jsonResult });
       })
       .catch(err => {
         console.log(err);
@@ -244,7 +240,7 @@ export function getComments(postid) {
         throw new Error("request failed");
       })
       .then(jsonResult => {
-        dispatch({ type: GET_COMMENTS, payload: jsonResult });
+        dispatch({ type: type.GET_COMMENTS, payload: jsonResult });
       })
       .catch(err => {
         console.log(err);
@@ -272,7 +268,7 @@ export function updatePostVote(direction, postid) {
         throw new Error("request failed");
       })
       .then(jsonResult => {
-        dispatch({ type: FETCH_POST, payload: jsonResult });
+        dispatch({ type: type.FETCH_POST, payload: jsonResult });
       })
       .catch(err => {
         console.log(err);
@@ -302,7 +298,7 @@ export function updateCommentVote(direction, commentid) {
       })
       .then(comment => {
         //console.log('jsonResult',jsonResult);
-        dispatch({ type: GET_COMMENTS, payload: blog.comments.filter(c => c.id !== comment.id).concat([comment]) });
+        dispatch({ type: type.GET_COMMENTS, payload: blog.comments.filter(c => c.id !== comment.id).concat([comment]) });
       })
       .catch(err => {
         console.log(err);
@@ -313,7 +309,7 @@ export function updateCommentVote(direction, commentid) {
 
 export function apiError(error) {
   return {
-    type: API_ERROR,
+    type: type.API_ERROR,
     payload: error
   };
 }

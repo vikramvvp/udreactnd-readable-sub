@@ -52,8 +52,9 @@ ReactDOM.render(
         <Switch>
           <Route path="/posts/new" component={ShowPostAddEdit} />
           <Route path="/posts/edit/:id" component={ShowPostAddEdit} />
-          <Route path="/posts/:id" component={PostDetails} />
+          <Route path="/:category/:id" component={PostDetails} />
           <Route exact path="/" component={DefaultView} />
+          <Route exact path="/:category" component={DefaultView} />
         </Switch>
       </div>
     </ConnectedRouter>
