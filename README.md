@@ -22,4 +22,6 @@ To check out the project:
     - `npm install`
     - `npm start`
 
+## Acknowledgements
 
+Thanks to Bootstrap layout templates "Blog Post" and "Blog Home" from [Start Bootstrap](https://startbootstrap.com/template-categories/all/)

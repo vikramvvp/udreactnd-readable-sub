@@ -37,8 +37,6 @@ const Categories = ({ categories, category, onSelectCategory }) => (
 )
 
 Categories.propTypes = {
-  categories: PropTypes.array.isRequired,
-  category: PropTypes.string.isRequired,
   onSelectCategory: PropTypes.func.isRequired
 }
 

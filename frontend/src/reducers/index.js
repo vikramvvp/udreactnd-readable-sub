@@ -21,7 +21,9 @@ function blog(state={category: "all", sortCriteria:{sortField:"title", sortOrder
     case GET_POSTS:
       return {...state,
         category: action.category,
-        posts: action.posts};
+        posts: action.posts,
+        post: {}
+      };
     case FETCH_POST:
       return {...state, 
         post: action.payload

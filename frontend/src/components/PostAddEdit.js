@@ -26,7 +26,7 @@ class PostAddEdit extends Component {
   }
 
   onFormSubmit = (e,existingPost) => {
-    let saveType = (existingPost.id === "") ? "add" : "edit";
+    let saveType = (existingPost.id) ? "edit" : "add";
     e.preventDefault(); 
     let updatedPost = {
       title: this.state.postTitle,

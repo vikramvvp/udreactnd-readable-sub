@@ -16,12 +16,14 @@ const Post = ({ post, onUpdateVoteScore }) => {
           Posted on {(new Date(post.timestamp)).toUTCString()} 
           &nbsp;&nbsp;&#124;&nbsp;&nbsp;
           <a href="" role="button"
+            title="Add Vote"
             className='btn btn-outline-primary'
             onClick={(e) => { e.preventDefault(); onUpdateVoteScore('upVote', post.id)}}>
             <FaThumbsOUp size={25} />
           </a>&nbsp;&nbsp;
         <span>{post.voteScore}</span>&nbsp;&nbsp;
         <a href="" role="button"
+          title="Reduce Vote"
             className='btn btn-outline-primary'
             onClick={(e) => { e.preventDefault(); onUpdateVoteScore('downVote', post.id)}}>
             <FaThumbsODown size={25} />
@@ -39,7 +41,6 @@ const Post = ({ post, onUpdateVoteScore }) => {
 }
 
 Post.propTypes = {
-  post: PropTypes.object.isRequired,
   onUpdateVoteScore: PropTypes.func.isRequired
 }
 

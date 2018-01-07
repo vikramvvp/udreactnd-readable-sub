@@ -22,7 +22,7 @@ const mapStateToProps = (state) => {
   }
 }
 
-const mapDispatchToProps = (dispatch, ownProps) => {
+const mapDispatchToProps = (dispatch) => {
   return {
     onPostLoad: (postid) => {dispatch(fetchPost(postid))},
     onUpdateVoteScore: (direction,id) => {dispatch(updatePostVote(direction,id))}

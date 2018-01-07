@@ -13,7 +13,7 @@ class ShowPostActions extends React.Component {
   }
 }
 
-const mapDispatchToProps = (dispatch, ownProps) => {
+const mapDispatchToProps = (dispatch) => {
   return {
     onDeletePost: (postid) => {dispatch(deletePost(postid))}
   }

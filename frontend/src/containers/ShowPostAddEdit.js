@@ -32,7 +32,7 @@ const mapStateToProps = (state) => {
   }
 }
 
-const mapDispatchToProps = (dispatch, ownProps) => {
+const mapDispatchToProps = (dispatch) => {
   return {
     onPostLoad: postid => {dispatch(fetchPost(postid))},
     onLoadCategories: () => {dispatch(loadCategories())},

@@ -23,7 +23,7 @@ const defaultData = {
     category: 'redux',
     voteScore: -5,
     deleted: false,
-    commentCount: 0
+    commentCount: 1
   },
   "4lm8jk3ym7mf1p33lnez": {
     id: '4lm8jk3ym7mf1p33lnez',
@@ -34,7 +34,7 @@ const defaultData = {
     category: 'udacity',
     voteScore: 4,
     deleted: false,
-    commentCount: 0
+    commentCount: 3
   }
 }
 
