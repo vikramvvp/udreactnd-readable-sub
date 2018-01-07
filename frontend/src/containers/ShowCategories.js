@@ -3,7 +3,7 @@ import { connect } from 'react-redux'
 import { loadCategories, selectCategory } from '../actions'
 import Categories from '../components/Categories'
 
-class CategoriesList extends React.Component {
+class ShowCategories extends React.Component {
   componentDidMount() {
     this.props.onCatLoad();
   }
@@ -29,4 +29,4 @@ const mapDispatchToProps = (dispatch) => {
   }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(CategoriesList)
+export default connect(mapStateToProps, mapDispatchToProps)(ShowCategories)

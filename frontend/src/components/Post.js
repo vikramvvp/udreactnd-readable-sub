@@ -8,7 +8,7 @@ export default function Post({ post, onUpdateVoteScore }) {
       <div>
         <h1 className="mt-4">{post.title}</h1>
         <p className="lead">
-          by {post.author}
+          by {post.author}&nbsp;&nbsp;&#124;&nbsp;&nbsp;category: {post.category}
         </p>
         <hr />
         <p>

@@ -66,7 +66,7 @@ class CommentsView extends Component {
       <div className="card">
         <h5 className="card-header">Comments:</h5>
         <div className="card-body">
-          {!comments ? <span>Be the first to comment!</span> : _.map(comments, comment => {
+          {!comments || comments.length === 0 ? <span>Be the first to comment!</span> : _.map(comments, comment => {
             const { id, timestamp, body, voteScore, author } = comment;
             return (
               <div className="card mb-4" key={id}>

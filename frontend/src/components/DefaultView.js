@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import AddNewPost from './AddNewPost';
-import CategoriesList from '../containers/CategoriesList';
+import PostActions from './PostActions';
+import ShowCategories from '../containers/ShowCategories';
 import VisiblePostsList from '../containers/VisiblePostsList';
 
 class DefaultView extends Component {
@@ -8,9 +8,9 @@ class DefaultView extends Component {
     return (
       <div className="row">
         <VisiblePostsList />
-        <div className="col-md-4">
-          <AddNewPost actions={['add']} />
-          <CategoriesList />
+        <div className="col-md-3">
+          <PostActions clickItems={['add']} />
+          <ShowCategories />
         </div>
       </div>
     );

@@ -1,6 +1,6 @@
 import _ from 'lodash';
 import { combineReducers } from 'redux';
-import { reducer as reduxFormReducer } from 'redux-form'
+import {routerReducer} from 'react-router-redux'
 
 import {
   GET_CATEGORIES,
@@ -56,5 +56,5 @@ function blog(state={category: "all", sortCriteria:{sortField:"title", sortOrder
 
 export default combineReducers ({
   blog,
-  form: reduxFormReducer
+  router: routerReducer
 });
