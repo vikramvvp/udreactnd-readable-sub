@@ -50,11 +50,11 @@ ReactDOM.render(
     <ConnectedRouter history={history}>
       <div className='container'>
         <Switch>
-          <Route path="/posts/new" component={ShowPostAddEdit} />
-          <Route path="/posts/edit/:id" component={ShowPostAddEdit} />
+          <Route exact path="/posts/new" component={ShowPostAddEdit} />
+          <Route exact path="/posts/edit/:id" component={ShowPostAddEdit} />
           <Route path="/:category/:id" component={PostDetails} />
           <Route exact path="/" component={DefaultView} />
-          <Route exact path="/:category" component={DefaultView} />
+          <Route path="/:category" component={DefaultView} />
         </Switch>
       </div>
     </ConnectedRouter>

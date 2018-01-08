@@ -13,14 +13,14 @@ class PostActions extends React.Component {
         <div className="card-body">
           <div className="btn-group-vertical">
             {_.indexOf(clickItems, 'list') !== -1 ?
-              <Link className="btn btn-secondary" to='/' >Back to list</Link> : ""}
+              <Link className="btn btn-secondary" to='/all' >Back to list</Link> : ""}
             {_.indexOf(clickItems, 'add') !== -1 ?
               <Link className="btn btn-secondary" to='/posts/new' >Add New Post</Link> : ""}
             {_.indexOf(clickItems, 'edit') !== -1 ?
             <Link className="btn btn-secondary" to={`/posts/edit/${this.props.match.params.id}`} >Edit Post</Link> : ""}
             {_.indexOf(clickItems, 'delete') !== -1 ?
               <a className="btn btn-secondary" href="" role="button"
-                onClick={(e) => { e.preventDefault(); onDeletePost(this.props.match.params.id) }}>
+                onClick={(e) => { e.preventDefault(); onDeletePost('postactions',this.props.match.params.id) }}>
                 Delete Post</a> : ""}
           </div>
         </div>

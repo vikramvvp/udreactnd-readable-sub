@@ -8,7 +8,7 @@ import DarkComments from 'react-icons/lib/fa/comments';
 import FaEdit from 'react-icons/lib/fa/edit';
 import FaTrash from 'react-icons/lib/fa/trash';
 
-const PostsList = ({ posts, category, onSortCriteriaChange, onUpdateVoteScore }) => {
+const PostsList = ({ posts, category, onSortCriteriaChange, onUpdateVoteScore, onDeletePost }) => {
   return (
       <div className="col-md-8">
         <h1 className="my-4">Posts List <small>- {category}</small></h1>
@@ -49,7 +49,7 @@ const PostsList = ({ posts, category, onSortCriteriaChange, onUpdateVoteScore })
             <a href="" role="button"
               title="Delete Post"
               className='btn btn-outline-secondary'
-              onClick={(e) => { e.preventDefault(); }}>
+              onClick={(e) => { e.preventDefault(); onDeletePost('postlist', post.id) }}>
               <FaTrash size={15} />
             </a>
             
@@ -60,7 +60,7 @@ const PostsList = ({ posts, category, onSortCriteriaChange, onUpdateVoteScore })
   )}
 
 PostsList.propTypes = {
-  posts: PropTypes.array.isRequired,
+  posts: PropTypes.array,
   category: PropTypes.string.isRequired,
   onSortCriteriaChange: PropTypes.func.isRequired,
   onUpdateVoteScore: PropTypes.func.isRequired

@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import FaThumbsOUp from 'react-icons/lib/fa/thumbs-o-up';
 import FaThumbsODown from 'react-icons/lib/fa/thumbs-o-down';
+import {Link} from 'react-router-dom';
 
 const Post = ({ post, onUpdateVoteScore }) => {
   if (post) {
@@ -36,7 +37,13 @@ const Post = ({ post, onUpdateVoteScore }) => {
     )
   }
   else {
-    return (<div></div>)
+    return (
+      <div className="col-md-8">
+        <h1 className="my-4">Page Not Found</h1>
+        <p>Sorry, there is nothing to see here</p>
+        <p><Link to="/">Back to Home</Link></p>
+      </div>
+    )
   }
 }
 

@@ -14,7 +14,7 @@ class ShowPostAddEdit extends React.Component {
   }
 
   render() {
-    const newPost = (this.props.match.url.indexOf('new') === -1 ? false : true)
+    const newPost = (this.props.match.url.indexOf('posts/new') === -1 ? false : true)
     return ( 
       ((newPost || ( !newPost && this.props.post)) ? <PostAddEdit 
         post={(this.props.post) ? this.props.post : {}}  

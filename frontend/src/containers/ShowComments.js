@@ -11,18 +11,21 @@ class ShowComments extends React.Component {
 
   render() {
     return ( 
+      (this.props.post ? 
       <CommentsView 
         comments={this.props.comments} 
         onUpdateVoteScore={this.props.onUpdateVoteScore} 
         onDeleteComment={this.props.onDeleteComment} 
         onSaveComment={this.props.onSaveComment} 
       />
+      : <div></div>)
     )
   }
 }
 
 const mapStateToProps = (state) => {
   return {
+    post: state.blog.post,
     comments: state.blog.comments
   }
 }

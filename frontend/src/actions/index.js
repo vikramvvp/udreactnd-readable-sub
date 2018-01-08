@@ -13,13 +13,12 @@ export function selectSortCriteria(sortCriteria) {
 
 export function selectCategory(category) {
   return function (dispatch, getState) {
-    dispatch({ type: type.SELECT_CATEGORY, payload: category })
     dispatch(push(`/${category}`))
+    dispatch(loadPosts(category))
   }
-  
 }
 
-export function deletePost(postid) {
+export function deletePost(source, postid) {
   let options = {
     headers: {
       'Authorization': 'vikrampatil',
@@ -29,6 +28,7 @@ export function deletePost(postid) {
     method: 'DELETE'
   }
   return function (dispatch, getState) {
+    const state = getState();
     return fetch(`${ROOT_URL}/posts/${postid}`, options)
       .then(result => {
         if (result.status === 200) {
@@ -37,7 +37,13 @@ export function deletePost(postid) {
         throw new Error("request failed");
       })
       .then(post => {
-        return dispatch(push('/'));
+        if (source === 'postlist') {
+          let updatedposts = state.blog.posts.filter(p => p.id !== post.id);
+          dispatch({ type: type.GET_POSTS, posts:updatedposts, category:state.blog.category });
+        }
+        else {
+          dispatch(push('/'));
+        }
       })
       .catch(err => {
         console.log(err);
@@ -189,10 +195,16 @@ export function loadCategories() {
 
 export function loadPosts(category) {
   return function (dispatch, getState) {
+    const windowsurl = window.location.href;
+    const urlLastPart = windowsurl.substr(windowsurl.lastIndexOf('/')+1,windowsurl.length - windowsurl.lastIndexOf('/'))
+    if (!category || urlLastPart !== "") {
+      category = urlLastPart
+    }
     let url = `${ROOT_URL}/posts`;
     if (category && category !== 'all') {
       url = `${ROOT_URL}/${category}/posts`;
     }
+    
     return fetch(url, AUTH_HEADER)
       .then(result => {
         if (result.status === 200) {
@@ -221,7 +233,12 @@ export function fetchPost(postid) {
         throw new Error("request failed");
       })
       .then(jsonResult => {
-        dispatch({ type: type.FETCH_POST, payload: jsonResult });
+        if (!jsonResult || !jsonResult.id) {
+          dispatch(push(`/category/notfound`))
+        }
+        else {
+          dispatch({ type: type.FETCH_POST, payload: jsonResult });
+        }
       })
       .catch(err => {
         console.log(err);
@@ -271,10 +288,10 @@ export function updatePostVote(source, direction, postid) {
       .then(jsonResult => {
         if (source === 'postlist') {
           let updatedposts = state.blog.posts.filter(p => p.id !== jsonResult.id).concat([jsonResult]);
-          return dispatch({ type: type.GET_POSTS, posts:updatedposts, category:state.blog.category });
+          dispatch({ type: type.GET_POSTS, posts:updatedposts, category:state.blog.category });
         }
         else {
-          return dispatch({ type: type.FETCH_POST, payload: jsonResult });
+          dispatch({ type: type.FETCH_POST, payload: jsonResult });
         }
       })
       .catch(err => {
@@ -304,7 +321,6 @@ export function updateCommentVote(direction, commentid) {
         throw new Error("request failed");
       })
       .then(comment => {
-        //console.log('jsonResult',jsonResult);
         dispatch({ type: type.GET_COMMENTS, payload: blog.comments.filter(c => c.id !== comment.id).concat([comment]) });
       })
       .catch(err => {
