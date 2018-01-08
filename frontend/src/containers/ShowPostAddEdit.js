@@ -14,22 +14,25 @@ class ShowPostAddEdit extends React.Component {
   }
 
   render() {
+    const newPost = (this.props.match.url.indexOf('new') === -1 ? false : true)
     return ( 
-      <PostAddEdit 
+      ((newPost || ( !newPost && this.props.post)) ? <PostAddEdit 
         post={(this.props.post) ? this.props.post : {}}  
         categories={this.props.categories}
         onSavePost={this.props.onSavePost} 
         onReset={this.props.onReset}
-      />
+        onLoad={this.props.onPostLoad}
+        onLoadCategories = {this.props.onLoadCategories}
+      /> : "")
     )
   }
 }
 
 const mapStateToProps = (state) => {
   return {
-    post: state.blog.post,
-    categories: state.blog.categories
-  }
+      post: state.blog.post,
+      categories: state.blog.categories
+    }
 }
 
 const mapDispatchToProps = (dispatch) => {

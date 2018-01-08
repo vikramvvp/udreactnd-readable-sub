@@ -4,14 +4,11 @@ import PropTypes from 'prop-types';
 import uuidv4 from 'uuid/v4'
 
 class PostAddEdit extends Component {
-  constructor() {
-    super();
-    this.state = {
-      postText: "",
-      postTitle: "",
-      postAuthor: "",
-      postCategory: ""
-    }
+  state = {
+    postText: "",
+    postTitle: "",
+    postAuthor: "",
+    postCategory: ""
   }
 
   componentDidMount() {
@@ -22,6 +19,11 @@ class PostAddEdit extends Component {
         postText: this.props.post.body,
         postAuthor: this.props.post.author
       });
+    }
+    else {
+      if (this.props.categories) {
+        this.setState({...this.state, postCategory:this.props.categories[0].name});
+      }
     }
   }
 
@@ -59,7 +61,7 @@ class PostAddEdit extends Component {
   render() {
     let { post, categories, onReset } = this.props;
     
-    return (
+    return ( 
       <div className="card my-4">
         <h5 className="card-header">{(!post.id) ? "Create a Post:" : "Edit the post:"}</h5>
         <div className="card-body">
@@ -101,7 +103,7 @@ class PostAddEdit extends Component {
 
 PostAddEdit.propTypes = {
   post: PropTypes.object.isRequired,
-  categories: PropTypes.array.isRequired,
+  categories: PropTypes.array,
   onSavePost: PropTypes.func.isRequired,
   onReset: PropTypes.func.isRequired
 }

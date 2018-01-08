@@ -18,14 +18,14 @@ const Post = ({ post, onUpdateVoteScore }) => {
           <a href="" role="button"
             title="Add Vote"
             className='btn btn-outline-primary'
-            onClick={(e) => { e.preventDefault(); onUpdateVoteScore('upVote', post.id)}}>
+            onClick={(e) => { e.preventDefault(); onUpdateVoteScore('post','upVote', post.id)}}>
             <FaThumbsOUp size={25} />
           </a>&nbsp;&nbsp;
         <span>{post.voteScore}</span>&nbsp;&nbsp;
         <a href="" role="button"
           title="Reduce Vote"
             className='btn btn-outline-primary'
-            onClick={(e) => { e.preventDefault(); onUpdateVoteScore('downVote', post.id)}}>
+            onClick={(e) => { e.preventDefault(); onUpdateVoteScore('post','downVote', post.id)}}>
             <FaThumbsODown size={25} />
           </a>
         </p>

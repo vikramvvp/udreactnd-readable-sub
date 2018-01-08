@@ -14,7 +14,7 @@ function blog(state={category: "all", sortCriteria:{sortField:"title", sortOrder
       return {...state,
         category: action.category,
         posts: action.posts,
-        post: {}
+        post: undefined
       };
     case type.FETCH_POST:
       return {...state, 

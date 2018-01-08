@@ -249,7 +249,7 @@ export function getComments(postid) {
   }
 }
 
-export function updatePostVote(direction, postid) {
+export function updatePostVote(source, direction, postid) {
   const options = {
     headers: {
       'Authorization': 'vikrampatil',
@@ -260,6 +260,7 @@ export function updatePostVote(direction, postid) {
     body: JSON.stringify({ option: direction })
   }
   return function (dispatch, getState) {
+    let state = getState();
     return fetch(`${ROOT_URL}/posts/${postid}`, options)
       .then(result => {
         if (result.status === 200) {
@@ -268,7 +269,13 @@ export function updatePostVote(direction, postid) {
         throw new Error("request failed");
       })
       .then(jsonResult => {
-        dispatch({ type: type.FETCH_POST, payload: jsonResult });
+        if (source === 'postlist') {
+          let updatedposts = state.blog.posts.filter(p => p.id !== jsonResult.id).concat([jsonResult]);
+          return dispatch({ type: type.GET_POSTS, posts:updatedposts, category:state.blog.category });
+        }
+        else {
+          return dispatch({ type: type.FETCH_POST, payload: jsonResult });
+        }
       })
       .catch(err => {
         console.log(err);

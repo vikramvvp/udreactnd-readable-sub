@@ -1,7 +1,7 @@
 import _ from 'lodash';
 import React from 'react'
 import { connect } from 'react-redux'
-import { loadPosts, selectSortCriteria } from '../actions'
+import { loadPosts, selectSortCriteria, updatePostVote } from '../actions'
 import PostsList from '../components/PostsList'
 
 class VisiblePostsList extends React.Component {
@@ -11,7 +11,12 @@ class VisiblePostsList extends React.Component {
 
   render() {
     return ( 
-      <PostsList posts={this.props.posts} category={this.props.category} onSortCriteriaChange={this.props.onSortCriteriaChange} />
+      <PostsList 
+        posts={this.props.posts} 
+        category={this.props.category} 
+        onSortCriteriaChange={this.props.onSortCriteriaChange} 
+        onUpdateVoteScore={this.props.onUpdateVoteScore} 
+      />
     )
   }
 }
@@ -36,7 +41,8 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
   return {
     onLoad: category => {dispatch(loadPosts(category))},
-    onSortCriteriaChange: criteria => {dispatch(selectSortCriteria(criteria))}
+    onSortCriteriaChange: criteria => {dispatch(selectSortCriteria(criteria))},
+    onUpdateVoteScore: (source,direction,id) => {dispatch(updatePostVote(source,direction,id))}
   }
 }
 

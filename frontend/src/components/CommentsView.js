@@ -77,13 +77,13 @@ class CommentsView extends Component {
                     Posted on {(new Date(timestamp)).toUTCString()}
                     &nbsp;&nbsp;&#124;&nbsp;&nbsp;
                     <a className="btn btn-outline-secondary" href="" role="button"
-                    title="Add Vote"
+                    title="Vote Up"
                             onClick={(e) => { e.preventDefault(); onUpdateVoteScore('upVote', id) }}>
                             <FaThumbsOUp size={15} />
                           </a>&nbsp;&nbsp;
                     <span>{voteScore}</span>&nbsp;&nbsp;
                     <a className="btn btn-outline-secondary" href="" role="button"
-                    title="Reduce Vote"
+                    title="Vote Down"
                       onClick={(e) => { e.preventDefault(); onUpdateVoteScore('downVote', id) }}>
                       <FaThumbsODown size={15} />
                     </a>
