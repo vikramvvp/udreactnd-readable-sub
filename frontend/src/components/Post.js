@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import FaThumbsOUp from 'react-icons/lib/fa/thumbs-o-up';
 import FaThumbsODown from 'react-icons/lib/fa/thumbs-o-down';
+import DarkComments from 'react-icons/lib/fa/comments';
 import {Link} from 'react-router-dom';
 
 const Post = ({ post, onUpdateVoteScore }) => {
@@ -10,7 +11,7 @@ const Post = ({ post, onUpdateVoteScore }) => {
       <div>
         <h1 className="mt-4">{post.title}</h1>
         <p className="lead">
-          by {post.author}&nbsp;&nbsp;&#124;&nbsp;&nbsp;category: {post.category}
+          by {post.author}&nbsp;&nbsp;&#124;&nbsp;&nbsp;category: {post.category}&nbsp;&nbsp;&#124;&nbsp;&nbsp;<i title="Comments"><DarkComments size={25} /></i> {post.commentCount}
         </p>
         <hr />
         <p>
