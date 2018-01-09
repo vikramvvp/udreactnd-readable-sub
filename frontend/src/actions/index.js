@@ -120,6 +120,7 @@ export function deleteComment(commentid) {
       })
       .then(comment => {
         dispatch({ type: type.GET_COMMENTS, payload: blog.comments.filter(c => c.id !== comment.id) });
+        dispatch({ type: type.FETCH_POST, payload: {...blog.post, commentCount: --blog.post.commentCount } });
       })
       .catch(err => {
         console.log(err);
@@ -166,6 +167,9 @@ export function saveComment(saveType, comment, postid) {
       })
       .then(comment => {
         dispatch({ type: type.GET_COMMENTS, payload: blog.comments.filter(c => c.id !== comment.id).concat([comment]) });
+        if (saveType === 'add') {
+          dispatch({ type: type.FETCH_POST, payload: {...blog.post, commentCount: ++blog.post.commentCount } });
+        }
       })
       .catch(err => {
         console.log(err);
