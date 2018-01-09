@@ -18,14 +18,14 @@ const Post = ({ post, onUpdateVoteScore }) => {
           Posted on {(new Date(post.timestamp)).toUTCString()} 
           &nbsp;&nbsp;&#124;&nbsp;&nbsp;
           <a href="" role="button"
-            title="Add Vote"
+            title="Vote Up"
             className='btn btn-outline-primary'
             onClick={(e) => { e.preventDefault(); onUpdateVoteScore('post','upVote', post.id)}}>
             <FaThumbsOUp size={25} />
           </a>&nbsp;&nbsp;
         <span>{post.voteScore}</span>&nbsp;&nbsp;
         <a href="" role="button"
-          title="Reduce Vote"
+          title="Vote Down"
             className='btn btn-outline-primary'
             onClick={(e) => { e.preventDefault(); onUpdateVoteScore('post','downVote', post.id)}}>
             <FaThumbsODown size={25} />
